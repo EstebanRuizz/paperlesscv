@@ -16,4 +16,3 @@ To set up the project, follow these steps:
 
 4. **Start Development Server with Watch Mode**:
    - To run the application in development mode with file watching, use the command `npm run start:dev --watch`.
-
