@@ -2,19 +2,56 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { TransformInterceptor } from './presentation/interceptors/TransformInterceptor';
+import {
+  FastifyAdapter,
+  NestFastifyApplication,
+} from '@nestjs/platform-fastify';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+class Main {
+  private app: NestFastifyApplication;
 
-  app.useGlobalInterceptors(new TransformInterceptor());
-  app.useGlobalPipes(
-    new ValidationPipe({
-      transform: true,
-      forbidNonWhitelisted: true,
-      forbidUnknownValues: true,
-    }),
-  );
+  public constructor() {
+    this.bootstrap();
+  }
 
-  await app.listen(3003);
+  private async bootstrap() {
+    // this.app = await NestFactory.create(AppModule);
+    this.app = await NestFactory.create<NestFastifyApplication>(
+      AppModule,
+      new FastifyAdapter(),
+    );
+
+    this.setupInterceptors();
+    this.setupPipes();
+    this.setupSwagger();
+
+    await this.app.listen(3003);
+  }
+
+  private setupInterceptors() {
+    this.app.useGlobalInterceptors(new TransformInterceptor());
+  }
+
+  private setupPipes() {
+    this.app.useGlobalPipes(
+      new ValidationPipe({
+        transform: true,
+        forbidNonWhitelisted: true,
+        forbidUnknownValues: true,
+      }),
+    );
+  }
+
+  private setupSwagger() {
+    const config = new DocumentBuilder()
+      .setTitle('API specification')
+      .setDescription('The API description')
+      .setVersion('1.0')
+      .build();
+    const document = SwaggerModule.createDocument(this.app, config);
+    SwaggerModule.setup('api', this.app, document);
+  }
 }
-bootstrap();
+
+new Main();
