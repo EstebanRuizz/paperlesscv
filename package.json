@@ -30,12 +30,12 @@
     "@nestjs/platform-fastify": "^10.3.9",
     "@nestjs/sequelize": "^10.0.1",
     "@nestjs/swagger": "^7.3.1",
-    "@nestjs/throttler": "^5.1.2",
+    "@nestjs/throttler": "^5.2.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
     "dotenv": "^16.4.5",
     "elasticsearch": "^16.7.3",
-    "mssql": "^10.0.2",
+    "mssql": "^10.0.4",
     "param-id-validator": "^1.0.0",
     "reflect-metadata": "^0.1.14",
     "rxjs": "^7.8.1",
@@ -43,7 +43,7 @@
     "sequelize-auto": "^0.8.8",
     "sequelize-typescript": "^2.1.6",
     "swagger-ui-express": "^5.0.1",
-    "tedious": "^18.2.0"
+    "tedious": "^18.2.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.3.2",
@@ -51,9 +51,9 @@
     "@nestjs/testing": "^10.3.9",
     "@types/express": "^4.17.21",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.14.2",
+    "@types/node": "^20.14.9",
     "@types/supertest": "^6.0.2",
-    "@types/validator": "^13.11.10",
+    "@types/validator": "^13.12.0",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8.57.0",
@@ -63,11 +63,11 @@
     "prettier": "3.2.5",
     "source-map-support": "^0.5.21",
     "supertest": "^6.3.4",
-    "ts-jest": "^29.1.4",
+    "ts-jest": "^29.1.5",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.2"
   },
   "jest": {
     "moduleFileExtensions": [
