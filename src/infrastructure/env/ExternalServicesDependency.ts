@@ -210,7 +210,7 @@ export class ExternalServicesDependency {
   private async createDatabase(container: Docker.Container): Promise<void> {
     await new Promise((resolve) => setTimeout(resolve, 50000));
 
-    const createDbCommand = `/opt/mssql-tools/bin/sqlcmd -S localhost -U ${process.env.database_username} -P ${process.env.database_password} -Q "CREATE DATABASE ${process.env.database_database_name}; SELECT [name] FROM sys.databases;"`;
+    const createDbCommand = `/opt/mssql-tools18/bin/sqlcmd -S 127.0.0.1 -U ${process.env.database_username} -P ${process.env.database_password} -Q "CREATE DATABASE ${process.env.database_database_name}; SELECT [name] FROM sys.databases;" -N -C`;
     console.log(createDbCommand);
 
     try {
