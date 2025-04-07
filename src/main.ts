@@ -34,6 +34,8 @@ class Main {
       new FastifyAdapter(),
     );
 
+    this.app.enableCors();
+
     this.setupInterceptors();
     this.setupPipes();
     this.setupSwagger();
