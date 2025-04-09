@@ -11,11 +11,13 @@ import {
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiTags, OmitType } from '@nestjs/swagger';
 import { ParamIdDtoValidatorCqrsService } from 'param-id-validator';
+import { OCRTextService } from 'src/core/application/CQRS/curriculum/commands/CreateCommandOCRText';
 import { GetAllCurriculumQuery } from 'src/core/application/CQRS/curriculum/queries/GetAllQuerycurriculum';
 import { GetByIdcurriculumQuery } from 'src/core/application/CQRS/curriculum/queries/GetByIdcurriculum';
 import { GetAllPaginatedcurriculumDTO } from 'src/core/application/DTO/http/Curriculum/GetAllPaginatedDTOCurriculum';
 import { GetByIdDTOcurriculum } from 'src/core/application/DTO/http/Curriculum/GetByIdDTOCurriculum';
 import { CreateActionDTOcurriculum } from 'src/core/application/DTO/http/curriculum/CreateActionDTOcurriculum';
+import { CreateOcrTextDto } from 'src/core/application/DTO/http/curriculum/CreateOcrTextDto';
 import { DeleteActionDTOcurriculum } from 'src/core/application/DTO/http/curriculum/DeleteActionDTOcurriculum';
 import { UpdateActionDTOcurriculum } from 'src/core/application/DTO/http/curriculum/UpdateActionDTOcurriculum';
 import { Curriculum } from 'src/infrastructure/persistence/paperlesscv/configuration/curriculum';
@@ -34,6 +36,7 @@ export class curriculumControllerHttp {
     private readonly paramIdDtoValidatorCqrs: ParamIdDtoValidatorCqrsService,
     private readonly getByIdcurriculumQuery: GetByIdcurriculumQuery,
     private readonly getAllCurriculumQuery: GetAllCurriculumQuery,
+    private readonly createCommandOCRText: OCRTextService,
   ) {}
 
   @Get()
@@ -55,6 +58,11 @@ export class curriculumControllerHttp {
     @Body() body: CreateActionDTOcurriculum,
   ): Promise<Curriculum> {
     return await this.commandBus.execute(body);
+  }
+
+  @Post('cv-orc')
+  public async create(@Body() createOcrTextDto: CreateOcrTextDto) {
+    return this.createCommandOCRText.execute(createOcrTextDto);
   }
 
   @Patch()

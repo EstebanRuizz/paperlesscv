@@ -2,6 +2,15 @@
 
 To set up the project, follow these steps:
 
+Install these docker images in your local machine:
+docker pull grafana/grafana:latest; 
+docker pull keycloak/keycloak:latest; 
+docker pull quay.io/keycloak/keycloak:latest; 
+docker pull redis:latest; 
+docker pull mcr.microsoft.com/mssql/server:2022-latest; 
+docker pull elasticsearch:7.17.9; 
+docker pull ollama/ollama:latest;
+
 1. **Add Environmental Variables**: 
    - Navigate to the project root directory.
    - Create a `.env` file if it doesn't exist already.

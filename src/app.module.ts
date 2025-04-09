@@ -11,12 +11,15 @@ import { GetBySearchcurriculum } from 'src/core/application/CQRS/curriculum/quer
 import { CreateCommandcurriculum } from 'src/core/application/CQRS/curriculum/commands/CreateCommandcurriculum';
 import { GetByIdcurriculumQuery } from 'src/core/application/CQRS/curriculum/queries/GetByIdcurriculum';
 import { UpdateCommandcurriculum } from 'src/core/application/CQRS/curriculum/commands/UpdateCommandcurriculum';
+import { OCRTextService } from './core/application/CQRS/curriculum/commands/CreateCommandOCRText';
+import { HttpModule, HttpService } from '@nestjs/axios';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     PaperlesscvDatabaseModule,
     CqrsModule,
+    HttpModule,
     ElasticsearchModule.register({
       node: new ConfigService().get<string>('elastic_search_end_point'),
     }),
@@ -27,6 +30,7 @@ import { UpdateCommandcurriculum } from 'src/core/application/CQRS/curriculum/co
     DeleteCommandcurriculum,
     GetBySearchcurriculum,
     CreateCommandcurriculum,
+    OCRTextService,
     GetByIdcurriculumQuery,
     UpdateCommandcurriculum,
   ],

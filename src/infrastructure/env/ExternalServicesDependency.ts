@@ -35,6 +35,7 @@ export class ExternalServicesDependency {
     await this.startGrafanaAsync();
     await this.startMongoDBAsync();
     await this.startElasticsearchAsync();
+    // await this.startOllamaAsync();
 
     await this.createDatabase(sqlServerContainer);
     await this.startKeyCloakAsync();
@@ -93,6 +94,22 @@ export class ExternalServicesDependency {
     const container = await this.docker.createContainer(containerConfig);
     await container.start();
     console.log('Elasticsearch container started.');
+  }
+
+  private async startOllamaAsync(): Promise<void> {
+    const containerConfig: ContainerCreateOptions = {
+      Image: 'ollama/ollama:latest',
+      HostConfig: {
+        PortBindings: {
+          '11434/tcp': [{ HostPort: '11434' }],
+        },
+      },
+      name: `${process.env.project_name}_container_service_ollama`,
+    };
+
+    const container = await this.docker.createContainer(containerConfig);
+    await container.start();
+    console.log('Ollama container started.');
   }
 
   private async startRedisAsync(): Promise<void> {
