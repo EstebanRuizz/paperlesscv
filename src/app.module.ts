@@ -13,6 +13,7 @@ import { GetByIdcurriculumQuery } from 'src/core/application/CQRS/curriculum/que
 import { UpdateCommandcurriculum } from 'src/core/application/CQRS/curriculum/commands/UpdateCommandcurriculum';
 import { OCRTextService } from './core/application/CQRS/curriculum/commands/CreateCommandOCRText';
 import { HttpModule, HttpService } from '@nestjs/axios';
+import { GetByIdOcrText } from './core/application/CQRS/curriculum/queries/GetByIdOcrText';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { HttpModule, HttpService } from '@nestjs/axios';
     CreateCommandcurriculum,
     OCRTextService,
     GetByIdcurriculumQuery,
+    GetByIdOcrText,
     UpdateCommandcurriculum,
   ],
   controllers: [curriculumControllerHttp],

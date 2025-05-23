@@ -35,7 +35,7 @@ export class ExternalServicesDependency {
     await this.startGrafanaAsync();
     await this.startMongoDBAsync();
     await this.startElasticsearchAsync();
-    // await this.startOllamaAsync();
+    await this.startOllamaAsync();
 
     await this.createDatabase(sqlServerContainer);
     await this.startKeyCloakAsync();

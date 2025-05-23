@@ -13,6 +13,7 @@ import { ApiTags, OmitType } from '@nestjs/swagger';
 import { ParamIdDtoValidatorCqrsService } from 'param-id-validator';
 import { OCRTextService } from 'src/core/application/CQRS/curriculum/commands/CreateCommandOCRText';
 import { GetAllCurriculumQuery } from 'src/core/application/CQRS/curriculum/queries/GetAllQuerycurriculum';
+import { GetByIdOcrText } from 'src/core/application/CQRS/curriculum/queries/GetByIdOcrText';
 import { GetByIdcurriculumQuery } from 'src/core/application/CQRS/curriculum/queries/GetByIdcurriculum';
 import { GetAllPaginatedcurriculumDTO } from 'src/core/application/DTO/http/Curriculum/GetAllPaginatedDTOCurriculum';
 import { GetByIdDTOcurriculum } from 'src/core/application/DTO/http/Curriculum/GetByIdDTOCurriculum';
@@ -37,6 +38,7 @@ export class curriculumControllerHttp {
     private readonly getByIdcurriculumQuery: GetByIdcurriculumQuery,
     private readonly getAllCurriculumQuery: GetAllCurriculumQuery,
     private readonly createCommandOCRText: OCRTextService,
+    private readonly getByIdOcrText: GetByIdOcrText,
   ) {}
 
   @Get()
@@ -58,6 +60,11 @@ export class curriculumControllerHttp {
     @Body() body: CreateActionDTOcurriculum,
   ): Promise<Curriculum> {
     return await this.commandBus.execute(body);
+  }
+
+  @Get('cv-orc/:id')
+  public async GetByIdOcrText(@Param('id') id: string) {
+    return await this.getByIdOcrText.execute(id);
   }
 
   @Post('cv-orc')
